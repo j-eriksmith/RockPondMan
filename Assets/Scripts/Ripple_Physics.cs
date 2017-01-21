@@ -34,7 +34,6 @@ public class Ripple_Physics : MonoBehaviour {
                     if (pushed_objects[i].GetComponent<Rigidbody2D>().velocity.magnitude < max_vel)
                         pushed_objects[i].GetComponent<Rigidbody2D>().AddForce((new Vector2(angle.x, angle.y)).normalized * force * Time.deltaTime);
                 }
-
             }
             else
                 Destroy(gameObject);
