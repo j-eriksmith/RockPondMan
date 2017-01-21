@@ -8,7 +8,9 @@ public class Ripple_Physics : MonoBehaviour {
     public float decrease_speed;
     public float increase_speed;
     public float force;
+    public float max_vel;
     public bool initialized = false;
+    private int cur_index = 0;
 
     void Start()
     {
@@ -23,13 +25,13 @@ public class Ripple_Physics : MonoBehaviour {
             {
                 transform.localScale += new Vector3(increase_speed, increase_speed, 0);
                 force -= decrease_speed;
-                for(int i = 0; i <pushed_objects.Length; ++i)
+                for(int i = 0; i <cur_index; ++i)
                 {
                     //find angle between game object and point of collision
                     Vector2 angle = -(gameObject.transform.position - pushed_objects[i].transform.position);
 
                     //Add force in given direction multiplied by the force of the wave at that moment
-                    if (pushed_objects[i].GetComponent<Rigidbody2D>().velocity.magnitude < 3)
+                    if (pushed_objects[i].GetComponent<Rigidbody2D>().velocity.magnitude < max_vel)
                         pushed_objects[i].GetComponent<Rigidbody2D>().AddForce((new Vector2(angle.x, angle.y)).normalized * force * Time.deltaTime);
                 }
 
@@ -41,12 +43,13 @@ public class Ripple_Physics : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D c)
     {
-        for(int i = 0; i < pushed_objects.Length; ++i)
+        for(int i = 0; i < cur_index; ++i)
         {
             if (c.gameObject == pushed_objects[i])
                 return;
         }
-        pushed_objects[pushed_objects.Length] = c.gameObject;
+        pushed_objects[cur_index] = c.gameObject;
+        cur_index++;
 
     }
 }
