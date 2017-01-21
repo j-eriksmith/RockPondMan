@@ -19,7 +19,7 @@ public class Drop_Item : MonoBehaviour {
     void Start()
     {
         //Enter the number of each item you want in here
-        choosen_item = 0;
+        choosen_item = -1;
         cur_item = Instantiate(list_of_items[choosen_item]);
 		for (int i = 0; i < num_of_items.Length; i++) {
 			num_rock_ui[i].text = num_of_items[i].ToString();
@@ -27,31 +27,30 @@ public class Drop_Item : MonoBehaviour {
         get_next_rock = true;
     }
 
-// Update is called once per frame
-void Update () {
+    // Update is called once per frame
+    void Update() {
         Vector3 mouse_pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (cur_item != null)
             cur_item.transform.position = new Vector3(mouse_pos.x, mouse_pos.y, 0);
+        if (choosen_item != -1) {
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            if(num_of_items[choosen_item] > 0)
-            {
+            if (Input.GetMouseButtonDown(0)) {
+                if (num_of_items[choosen_item] > 0 && CheckDropLocation.canDrop) {
+                    get_next_rock = false;
+                    StartCoroutine(drop_rock(mouse_pos.x, mouse_pos.y, cur_item.gameObject));
+                    num_of_items[choosen_item]--;
+                    num_rock_ui[choosen_item].text = num_of_items[choosen_item].ToString();
+                    cur_item = null;
+                }
+            }
+        
+            //JUST FOR TESTING CHANGE THIS TO ALLOW BUTTONS TO CHANGE ROCK
+            if (cur_item == null && num_of_items[choosen_item] != 0 && get_next_rock) {
+                cur_item = Instantiate(list_of_items[choosen_item]);
                 get_next_rock = false;
-                StartCoroutine(drop_rock(mouse_pos.x, mouse_pos.y, cur_item.gameObject));
-                num_of_items[choosen_item]--;
-				num_rock_ui[choosen_item].text = num_of_items[choosen_item].ToString();
-                cur_item = null;
             }
         }
-        //JUST FOR TESTING CHANGE THIS TO ALLOW BUTTONS TO CHANGE ROCK
-        if(cur_item == null && num_of_items[choosen_item] != 0 && get_next_rock)
-        {
-            cur_item = Instantiate(list_of_items[choosen_item]);
-            get_next_rock = false;
-        }
-
     }
 
 
