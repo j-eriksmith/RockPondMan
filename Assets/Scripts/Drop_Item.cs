@@ -5,6 +5,7 @@ using UnityEngine;
 public class Drop_Item : MonoBehaviour {
 
     public GameObject ripple_prefab;
+    public AudioSource audio;
     public int num_of_differenet_items;
     public int[] num_of_items;
     public GameObject[] list_of_items;
@@ -58,6 +59,7 @@ void create_ripple(float mouseX, float mouseY, Rock_Attributes cur_rock)
         rp.initialized = true;
         ripple.transform.position = new Vector3(mouseX, mouseY, 0);
         
+        
     }
 
 IEnumerator drop_rock(float mouseX, float mouseY, GameObject rock)
@@ -70,6 +72,7 @@ IEnumerator drop_rock(float mouseX, float mouseY, GameObject rock)
             yield return new WaitForSeconds(0.01f);
         }
         create_ripple(mouseX, mouseY, rock.GetComponent<Rock_Attributes>());
+        audio.Play();
         Destroy(rock);
         get_next_rock = true;   
     }
