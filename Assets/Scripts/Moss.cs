@@ -19,4 +19,11 @@ public class Moss : MonoBehaviour {
             rb.drag += dragIncrease;
         }
     }
+
+    void OnTriggerExit2D(Collider2D c) {
+        if(c.gameObject.tag == "Trash") {
+            Rigidbody2D rb = c.GetComponent<Rigidbody2D>();
+            rb.drag -= dragIncrease;
+        }
+    }
 }
