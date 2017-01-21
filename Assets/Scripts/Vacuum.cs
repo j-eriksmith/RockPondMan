@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Vacuum : MonoBehaviour {
     public GameObject[] pulled_objects;
-    public bool initialized = false;
     private int cur_index = 0;
     public float speed;
 
