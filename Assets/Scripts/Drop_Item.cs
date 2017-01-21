@@ -69,7 +69,6 @@ IEnumerator drop_rock(float mouseX, float mouseY, GameObject rock)
         }
         create_ripple(mouseX, mouseY, rock.GetComponent<Rock_Attributes>());
         Destroy(rock);
-        yield return new WaitForSeconds(0.4f);
         get_next_rock = true;   
     }
 }
