@@ -28,8 +28,8 @@ public class Vacuum : MonoBehaviour {
         }
         if(c.gameObject.tag == "Trash"){
             pulled_objects[cur_index] = c.gameObject;
+            cur_index++;
         }
-        cur_index++;
     }
 
     // Returns the number objects pulled in by vacuum.

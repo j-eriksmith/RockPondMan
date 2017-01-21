@@ -14,8 +14,7 @@ public class Patrol : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         waypoints = GameObject.FindGameObjectsWithTag(tagSeek);
-        Array.Sort(waypoints, compareWaypoints);
-        
+        Array.Sort(waypoints, compareWaypoints);        
 	}
 	
 	// Update is called once per frame
