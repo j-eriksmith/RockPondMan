@@ -25,13 +25,13 @@ public class Animate_Text : MonoBehaviour {
 
     IEnumerator Animate()
     {
-        
+        GetComponent<AudioSource>().Play();
         while (transform.localScale.x < 1f && transform.localScale.y < 1f)
         {
             transform.localScale += new Vector3(speed, speed, 0);
             yield return new WaitForSeconds(0.00001f);
         }
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         Destroy(gameObject);
     }
 }
