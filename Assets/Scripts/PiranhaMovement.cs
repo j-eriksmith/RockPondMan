@@ -9,13 +9,11 @@ public class PiranhaMovement : MonoBehaviour{
 
     public float speed;
     
-	// Use this for initialization
 	void Start ()
     {
         hit = false;
     }
-	
-	// Update is called once per frame
+
 	void Update ()
     {
         if (hit == true)
