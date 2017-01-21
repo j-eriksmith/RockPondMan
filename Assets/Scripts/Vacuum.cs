@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Vacuum : MonoBehaviour {
-    private GameObject[] pulled_objects;
-    public bool initialized = false;
+    public GameObject[] pulled_objects;
     private int cur_index = 0;
     public float speed;
 
@@ -15,8 +14,8 @@ public class Vacuum : MonoBehaviour {
 	void Update () {
         for (int i = 0; i < cur_index; ++i)
         {
-            Vector2 vaccumPosition = gameObject.transform.position;
-            pulled_objects[i].transform.position = Vector2.MoveTowards(pulled_objects[i].transform.position, vaccumPosition, speed * Time.deltaTime);
+            Vector2 vacuumPosition = gameObject.transform.position;
+            pulled_objects[i].transform.position = Vector2.MoveTowards(pulled_objects[i].transform.position, vacuumPosition, speed * Time.deltaTime);
         }
     }
 
@@ -31,5 +30,11 @@ public class Vacuum : MonoBehaviour {
             pulled_objects[cur_index] = c.gameObject;
         }
         cur_index++;
+    }
+
+    // Returns the number objects pulled in by vacuum.
+    public int ObjectsPulled()
+    {
+        return (pulled_objects.Length);
     }
 }
