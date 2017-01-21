@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PiranahMovement : MonoBehaviour{
+public class PiranhaMovement : MonoBehaviour{
     public GameObject location;
 
     private bool hit;
+
+    public float speed;
     
 	// Use this for initialization
 	void Start ()
@@ -18,15 +20,15 @@ public class PiranahMovement : MonoBehaviour{
     {
         if (hit == true)
         {
-            transform.position = Vector2.MoveTowards(transform.position, location.transform.position, 30 * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, location.transform.position, speed * Time.deltaTime);
         }
     }
 
     void OnTriggerEnter2D(Collider2D c)
     {
-        if (c.gameObject.tag == "ripple")
+        if (c.gameObject.tag == "Ripple")
         {
-                hit = true;
+            hit = true;
         }
     }
 }
