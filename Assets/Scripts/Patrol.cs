@@ -9,10 +9,11 @@ public class Patrol : MonoBehaviour {
     private bool backwards = false;
 
     public float movespeed;
+    public string tagSeek;
 
 	// Use this for initialization
 	void Start () {
-        waypoints = GameObject.FindGameObjectsWithTag("Waypoints");
+        waypoints = GameObject.FindGameObjectsWithTag(tagSeek);
         Array.Sort(waypoints, compareWaypoints);
         
 	}
