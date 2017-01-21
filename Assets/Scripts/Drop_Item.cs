@@ -7,7 +7,7 @@ public class Drop_Item : MonoBehaviour {
 	
 	public Text[] num_rock_ui;
     public GameObject ripple_prefab;
-    public AudioSource audio;
+    public AudioSource rock_sound;
     public int num_of_differenet_items;
     public int[] num_of_items;
     public GameObject[] list_of_items;
@@ -20,7 +20,7 @@ public class Drop_Item : MonoBehaviour {
     {
         //Enter the number of each item you want in here
         choosen_item = -1;
-        cur_item = Instantiate(list_of_items[choosen_item]);
+        cur_item = null;
 		for (int i = 0; i < num_of_items.Length; i++) {
 			num_rock_ui[i].text = num_of_items[i].ToString();
 		}
@@ -36,6 +36,7 @@ public class Drop_Item : MonoBehaviour {
         if (choosen_item != -1) {
 
             if (Input.GetMouseButtonDown(0)) {
+                print(CheckDropLocation.canDrop);
                 if (num_of_items[choosen_item] > 0 && CheckDropLocation.canDrop) {
                     get_next_rock = false;
                     StartCoroutine(drop_rock(mouse_pos.x, mouse_pos.y, cur_item.gameObject));
@@ -77,7 +78,7 @@ IEnumerator drop_rock(float mouseX, float mouseY, GameObject rock)
             yield return new WaitForSeconds(0.01f);
         }
         create_ripple(mouseX, mouseY, rock.GetComponent<Rock_Attributes>());
-        audio.Play();
+        rock_sound.Play();        
         Destroy(rock);
         get_next_rock = true;   
     }
