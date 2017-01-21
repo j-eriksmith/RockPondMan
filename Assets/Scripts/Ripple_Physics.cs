@@ -23,7 +23,7 @@ public class Ripple_Physics : MonoBehaviour {
         {
             if (force > 0)
             {
-                transform.localScale += new Vector3(increase_speed, increase_speed, 0);
+                transform.localScale += new Vector3(increase_speed/10, increase_speed/10, 0);
                 force -= decrease_speed;
                 for(int i = 0; i <cur_index; ++i)
                 {
