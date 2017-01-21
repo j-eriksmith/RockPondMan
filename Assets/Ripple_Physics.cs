@@ -22,7 +22,7 @@ public class Ripple_Physics : MonoBehaviour {
         {
             if (force > 0)
             {
-                collider.radius += increase_speed;
+                transform.localScale += new Vector3(increase_speed, increase_speed, 0);
                 force -= decrease_speed;
             }
             else
@@ -30,8 +30,9 @@ public class Ripple_Physics : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter2D(Collision2D c)
+    void OnColliderEnter2D(Collision2D c)
     {
+        print("hey ther");
         for(int i = 0; i < pushed_objects.Length; ++i)
         {
             if (c.gameObject == pushed_objects[i])
