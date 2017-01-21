@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Drop_Item : MonoBehaviour {
-
+	
+	public Text[] num_rock_ui;
     public GameObject ripple_prefab;
     public AudioSource audio;
     public int num_of_differenet_items;
@@ -19,6 +21,9 @@ public class Drop_Item : MonoBehaviour {
         //Enter the number of each item you want in here
         choosen_item = 0;
         cur_item = Instantiate(list_of_items[choosen_item]);
+		for (int i = 0; i < num_of_items.Length; i++) {
+			num_rock_ui[i].text = num_of_items[i].ToString();
+		}
         get_next_rock = true;
     }
 
@@ -36,6 +41,7 @@ void Update () {
                 get_next_rock = false;
                 StartCoroutine(drop_rock(mouse_pos.x, mouse_pos.y, cur_item.gameObject));
                 num_of_items[choosen_item]--;
+				num_rock_ui[choosen_item].text = num_of_items[choosen_item].ToString();
                 cur_item = null;
             }
         }
@@ -76,4 +82,12 @@ IEnumerator drop_rock(float mouseX, float mouseY, GameObject rock)
         Destroy(rock);
         get_next_rock = true;   
     }
+	public void change_rock(int rock)
+	{
+		if (cur_item != null)
+			Destroy (cur_item);
+		cur_item = null;
+		get_next_rock = true;
+		choosen_item = rock;
+	}
 }
