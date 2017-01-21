@@ -23,7 +23,8 @@ public class Drop_Item : MonoBehaviour {
 void Update () {
         Vector3 mouse_pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        cur_item.transform.position = new Vector3(mouse_pos.x, mouse_pos.y, 0);
+        if (cur_item != null)
+            cur_item.transform.position = new Vector3(mouse_pos.x, mouse_pos.y, 0);
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -35,7 +36,7 @@ void Update () {
             }
         }
         //JUST FOR TESTING CHANGE THIS TO ALLOW BUTTONS TO CHANGE ROCK
-        if(cur_item == null)
+        if(cur_item == null && num_of_items[choosen_item] != 0)
             cur_item = Instantiate(list_of_items[choosen_item]);
 
     }
