@@ -62,6 +62,8 @@ void create_ripple(float mouseX, float mouseY, Rock_Attributes cur_rock)
 
 IEnumerator drop_rock(float mouseX, float mouseY, GameObject rock)
     {
+        SpriteRenderer rock_sprite = rock.GetComponent<SpriteRenderer>();
+        rock_sprite.color = new Color(rock_sprite.color.r, rock_sprite.color.g, rock_sprite.color.b, 255);
         for (int i = 0; i < 50; ++i)
         {
             rock.transform.localScale -= new Vector3(0.1f, 0.1f, 0);
