@@ -48,6 +48,7 @@ public class Drop_Item : MonoBehaviour {
                 {
                     Destroy(cur_item);
                     cur_item = null; get_next_rock = true; choosen_item = -1;
+
                 }
             }
         
