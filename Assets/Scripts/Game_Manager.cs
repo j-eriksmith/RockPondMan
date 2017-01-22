@@ -13,7 +13,7 @@ public class Game_Manager : MonoBehaviour {
     public Canvas canvas;
     private bool won = false;
     private Camera cam;
-	public GameObject e_pause, event_sys;
+    public GameObject e_pause;
 
     void Start()
     {
@@ -28,7 +28,6 @@ public class Game_Manager : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Escape))
         {
             e_pause.SetActive(!e_pause.activeSelf);
-            event_sys.SetActive(!event_sys.activeSelf);
         }
 
         int vacuum_total = 0;
