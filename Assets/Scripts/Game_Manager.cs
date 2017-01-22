@@ -13,7 +13,7 @@ public class Game_Manager : MonoBehaviour {
     public Canvas canvas;
     public Camera cam;
     private bool won = false;
-	public GameObject e_pause;
+	public GameObject e_pause, event_sys;
 	
 	// Update is called once per frame
 	void Update () {
@@ -21,8 +21,11 @@ public class Game_Manager : MonoBehaviour {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
 		if (Input.GetKeyDown (KeyCode.Escape))
-			e_pause.SetActive (!e_pause.activeSelf);
-		
+        {
+            e_pause.SetActive(!e_pause.activeSelf);
+            event_sys.SetActive(!event_sys.activeSelf);
+        }
+
         int vacuum_total = 0;
         for (int i = 0; i < vc.Length; ++i)
             vacuum_total += vc[i].return_items_caught();
