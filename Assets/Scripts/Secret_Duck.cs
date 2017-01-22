@@ -7,6 +7,7 @@ public class Secret_Duck : MonoBehaviour {
 
     public AudioSource duck_noise;
     public string level_to_unlock;
+    public string display_level;
     public Canvas canvas;
     public Text unlock_duck;
 	
@@ -20,7 +21,7 @@ public class Secret_Duck : MonoBehaviour {
         PlayerPrefs.SetInt(level_to_unlock, 1);
         Text duck_text = Instantiate(unlock_duck, canvas.transform);
         duck_text.transform.position = Vector3.zero;
-        duck_text.text = "Duck Level " + level_to_unlock + " \nUnlocked!";
+        duck_text.text = "Duck Level " + display_level + " \nUnlocked!";
         Destroy(gameObject);
 	}
 
