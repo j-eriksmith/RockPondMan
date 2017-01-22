@@ -24,7 +24,7 @@ public class Patrol : MonoBehaviour {
 	}
     void moveToWaypoint() { //Using current waypoint destination, gradually move towards destination (called by Update)
         Vector3 target = waypoints[currentWaypoint].transform.position;
-        transform.position = Vector3.MoveTowards(transform.position, target, movespeed);
+        transform.position = Vector3.MoveTowards(transform.position, target, ((movespeed * 100) * Time.deltaTime));
         if (transform.position == target)
         {
             findNextWaypoint();
