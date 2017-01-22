@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Game_Manager : MonoBehaviour {
 
     public int need_to_collect;
-    public VacuumCollision vc;
+    public VacuumCollision[] vc;
     public start_to_level_selection level_select_script;
     public Text Win_Text;
     public Canvas canvas;
@@ -17,9 +17,11 @@ public class Game_Manager : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.R))
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
+        int vacuum_total = 0;
+        for (int i = 0; i < vc.Length; ++i)
+            vacuum_total += vc[i].return_items_caught();
         
-        if (need_to_collect == vc.return_items_caught() && !won)
+        if (need_to_collect == vacuum_total && !won)
         {
             StartCoroutine(Win_Level());
             won = true;
