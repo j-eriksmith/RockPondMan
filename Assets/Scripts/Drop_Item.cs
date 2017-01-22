@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Drop_Item : MonoBehaviour {
 	
 	public Text[] num_rock_ui;
+    public Text Restart_Text;
     public GameObject ripple_prefab;
     public AudioSource rock_sound;
     public int num_of_differenet_items;
@@ -13,7 +14,7 @@ public class Drop_Item : MonoBehaviour {
     public GameObject[] list_of_items;
     private GameObject cur_item;
     private int choosen_item;
-    private bool get_next_rock;
+    private bool get_next_rock, blinking_restart;
 
     // Use this for initialization
     void Start()
@@ -25,6 +26,7 @@ public class Drop_Item : MonoBehaviour {
 			num_rock_ui[i].text = num_of_items[i].ToString();
 		}
         get_next_rock = true;
+        blinking_restart = false;
     }
 
     // Update is called once per frame
@@ -57,6 +59,16 @@ public class Drop_Item : MonoBehaviour {
                 cur_item.transform.position = new Vector3(mouse_pos.x, mouse_pos.y, 0);
                 get_next_rock = false;
             }
+        }
+
+        int sum = 0;
+        for (int i = 0; i < num_of_items.Length; ++i)
+            sum += num_of_items[i];
+
+        if(sum == 0 && !blinking_restart)
+        {
+            StartCoroutine(Blink_Restart());
+            blinking_restart = true;
         }
     }
 
@@ -96,4 +108,18 @@ IEnumerator drop_rock(float mouseX, float mouseY, GameObject rock)
 		get_next_rock = true;
 		choosen_item = rock;
 	}
+
+    IEnumerator Blink_Restart()
+    {
+        Restart_Text.gameObject.SetActive(true);
+        string text_to_hold = Restart_Text.text;
+        print(text_to_hold);
+        while (true)
+        {
+            Restart_Text.text = "";
+            yield return new WaitForSeconds(0.5f);
+            Restart_Text.text = text_to_hold;
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
 }
