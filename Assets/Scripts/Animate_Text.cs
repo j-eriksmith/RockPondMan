@@ -5,6 +5,7 @@ using UnityEngine;
 public class Animate_Text : MonoBehaviour {
 
     public float speed;
+    public bool delete = false;
     private bool not_started = true;
 	
     void Start()
@@ -32,6 +33,7 @@ public class Animate_Text : MonoBehaviour {
             yield return new WaitForSeconds(0.00001f);
         }
         yield return new WaitForSeconds(1.5f);
-        Destroy(gameObject);
+        if(delete)
+            Destroy(gameObject);
     }
 }
