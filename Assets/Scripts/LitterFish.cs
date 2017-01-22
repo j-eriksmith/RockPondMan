@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class LitterFish : MonoBehaviour {
     public float cycleTime = 3f;
+    public Sprite closedMouth;
+    public Sprite openMouth;
+    public float waitTime;
+
     private float underwaterTransparency = 0.3f;
     private Color currentTransparency;
     private bool aboveWater = true;
@@ -16,7 +20,8 @@ public class LitterFish : MonoBehaviour {
 	}
 
     IEnumerator FishBobbing(float aValue, float aTime) {
-        for(;;)
+        yield return new WaitForSeconds(waitTime);
+        for (;;)
         {
             yield return new WaitForSeconds(aTime);
             StartCoroutine(ChaseAlpha(!aboveWater, aTime / 3.0f));
@@ -30,18 +35,24 @@ public class LitterFish : MonoBehaviour {
 
         if(!desiredState) {
             aboveWater = false;
+            this.GetComponent<SpriteRenderer>().sprite = closedMouth;
+
         }
 
-        while(accumulator < overTime) {
-            
+        while (accumulator < overTime)
+        {
+
             float lerpAlpha = Mathf.Lerp(startAlpha, desiredAlpha, accumulator / overTime);
             Color newColor = new Color(1, 1, 1, lerpAlpha);
             gameObject.GetComponent<SpriteRenderer>().color = newColor;
 
             yield return 0;
             accumulator += Time.deltaTime;
+
         }
         aboveWater = desiredState;
+        if (aboveWater)
+            this.GetComponent<SpriteRenderer>().sprite = openMouth;
     }
 
     void OnTriggerStay2D(Collider2D c) {
