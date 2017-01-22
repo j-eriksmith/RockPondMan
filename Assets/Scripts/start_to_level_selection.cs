@@ -14,4 +14,7 @@ public class start_to_level_selection : MonoBehaviour {
 		Application.LoadLevel (level);
 	}
 
+    public void Quit() {
+        Application.Quit();
+    }
 }
