@@ -11,6 +11,7 @@ public class Game_Manager : MonoBehaviour {
     public start_to_level_selection level_select_script;
     public Text Win_Text;
     public Canvas canvas;
+    public Camera cam;
     private bool won = false;
 	
 	// Update is called once per frame
@@ -34,7 +35,16 @@ public class Game_Manager : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         Text win_text = Instantiate(Win_Text, canvas.transform);
         win_text.transform.position = Vector3.zero;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
+        while(cam.transform.position.x < 22)
+        {
+            if (cam.transform.position.x + 0.18f > 22)
+                cam.transform.position +=  new Vector3(22 - cam.transform.position.x, 0, 0);
+            else
+                cam.transform.position += new Vector3(0.18f, 0, 0);
+            win_text.transform.localPosition += new Vector3(-1f, 0, 0);
+            yield return new WaitForSeconds(0.00001f);
+        }
         level_select_script.LoadOnClick(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
