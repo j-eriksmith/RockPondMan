@@ -20,7 +20,7 @@ public class Pause_Script : MonoBehaviour {
             rb2.velocity = Vector2.zero;
         }
         for (int i = 0; i < rocks.Length; ++i)
-            rocks[i].enabled = true;
+            rocks[i].enabled = false;
     }
 
     void OnDisable()
@@ -29,6 +29,6 @@ public class Pause_Script : MonoBehaviour {
         for (int i = 0; i < movement_vectors.Length; ++i)
             list_of_moveing[i].GetComponent<Rigidbody2D>().velocity = movement_vectors[i];
         for (int i = 0; i < rocks.Length; ++i)
-            rocks[i].enabled = false;
+            rocks[i].enabled = true;
     }
 }
