@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LitterFish : MonoBehaviour {
     public float cycleTime = 3f;
@@ -13,6 +14,8 @@ public class LitterFish : MonoBehaviour {
     private bool aboveWater = true;
 
     private AudioSource biteSound;
+
+    public Text Restart_Text;
 
     void Start() {
         StartCoroutine(FishBobbing(underwaterTransparency, cycleTime));
@@ -66,47 +69,59 @@ public class LitterFish : MonoBehaviour {
         if(c.gameObject.tag == "Trash") {
             biteSound.Play();
             c.gameObject.SetActive(false);
+            StartCoroutine(Blink_Restart());
         }
     }
 
-    /*
-    IEnumerator FishBobbing() {
-        while(currentTransparency.a <= 1) {
-            currentTransparency.a += incrementalValue;
-            gameObject.GetComponent<SpriteRenderer>().color = currentTransparency;
-            new WaitForSeconds(0.5f);
+    IEnumerator Blink_Restart() {
+        Restart_Text.gameObject.SetActive(true);
+        string text_to_hold = Restart_Text.text;
+        while(true) {
+            Restart_Text.text = "";
+            yield return new WaitForSeconds(0.5f);
+            Restart_Text.text = text_to_hold;
+            yield return new WaitForSeconds(0.5f);
         }
-        print("Done");
-        yield return new WaitForSeconds(cycleTime);
-        while(currentTransparency.a >= underwaterTransparency) {
-            currentTransparency.a -= incrementalValue;
-            gameObject.GetComponent<SpriteRenderer>().color = currentTransparency;
-            new WaitForSeconds(0.5f);
-        }
+    }
 
-    
-    IEnumerator FishBobbing() {
-        if(currentTransparency.a <= 1) {
-            for(float i = underwaterTransparency; i <=1f; i += 0.1f) {
-                currentTransparency.a = i;
+        /*
+        IEnumerator FishBobbing() {
+            while(currentTransparency.a <= 1) {
+                currentTransparency.a += incrementalValue;
                 gameObject.GetComponent<SpriteRenderer>().color = currentTransparency;
+                new WaitForSeconds(0.5f);
             }
-            yield return new WaitForSeconds(3f);
-        }
-        if(currentTransparency.a >= underwaterTransparency) {
+            print("Done");
+            yield return new WaitForSeconds(cycleTime);
+            while(currentTransparency.a >= underwaterTransparency) {
+                currentTransparency.a -= incrementalValue;
+                gameObject.GetComponent<SpriteRenderer>().color = currentTransparency;
+                new WaitForSeconds(0.5f);
+            }
+
+
+        IEnumerator FishBobbing() {
+            if(currentTransparency.a <= 1) {
+                for(float i = underwaterTransparency; i <=1f; i += 0.1f) {
+                    currentTransparency.a = i;
+                    gameObject.GetComponent<SpriteRenderer>().color = currentTransparency;
+                }
+                yield return new WaitForSeconds(3f);
+            }
+            if(currentTransparency.a >= underwaterTransparency) {
+                for(float i = 1f; i <= underwaterTransparency; i -= 0.1f) {
+                    currentTransparency.a = i;
+                    gameObject.GetComponent<SpriteRenderer>().color = currentTransparency;
+                }
+                yield return new WaitForSeconds(3f);
+            }
+
+            for(float i = underwaterTransparency; i <= 1f; i += 0.1f) {
+                GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, i);
+            }
+            yield return new WaitForSeconds(cycleTime);
             for(float i = 1f; i <= underwaterTransparency; i -= 0.1f) {
-                currentTransparency.a = i;
-                gameObject.GetComponent<SpriteRenderer>().color = currentTransparency;
+                GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, i);
             }
-            yield return new WaitForSeconds(3f);
-        }
-        
-        for(float i = underwaterTransparency; i <= 1f; i += 0.1f) {
-            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, i);
-        }
-        yield return new WaitForSeconds(cycleTime);
-        for(float i = 1f; i <= underwaterTransparency; i -= 0.1f) {
-            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, i);
-        }
-        */
-}
+            */
+    }
