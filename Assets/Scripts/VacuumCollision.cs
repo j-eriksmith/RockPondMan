@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class VacuumCollision : MonoBehaviour
 {
-
-	void Start()
-    {
-		
-	}
-
-	void Update()
-    {
-        
-	}
+    private int items_caught = 0;
 
     private void OnTriggerEnter2D(Collider2D c)
     {
         if(c.gameObject.tag == "Trash")
         {
+            items_caught++;
             c.gameObject.SetActive(false);
         }
+    }
+
+    public int return_items_caught()
+    {
+        return items_caught;
     }
 }
