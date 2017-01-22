@@ -44,6 +44,11 @@ public class Drop_Item : MonoBehaviour {
                     num_rock_ui[choosen_item].text = num_of_items[choosen_item].ToString();
                     cur_item = null;
                 }
+                else
+                {
+                    Destroy(cur_item);
+                    cur_item = null; get_next_rock = true; choosen_item = -1;
+                }
             }
         
             //JUST FOR TESTING CHANGE THIS TO ALLOW BUTTONS TO CHANGE ROCK
