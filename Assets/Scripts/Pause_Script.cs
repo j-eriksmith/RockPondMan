@@ -5,7 +5,6 @@ using UnityEngine;
 public class Pause_Script : MonoBehaviour {
 
     public GameObject[] list_of_moveing;
-    public Drop_Item di;
     private Vector2[] movement_vectors;
 	
     void OnEnable()
@@ -16,7 +15,6 @@ public class Pause_Script : MonoBehaviour {
             Rigidbody2D rb2 = list_of_moveing[i].GetComponent<Rigidbody2D>();
             movement_vectors[i] = rb2.velocity;
             rb2.velocity = Vector2.zero;
-            di.change_rock(-1);
         }
     }
 

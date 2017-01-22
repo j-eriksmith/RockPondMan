@@ -11,7 +11,6 @@ public class Game_Manager : MonoBehaviour {
     public start_to_level_selection level_select_script;
     public Text Win_Text;
     public Canvas canvas;
-    public bool duck_level;
     private bool won = false;
     private Camera cam;
 	public GameObject e_pause, event_sys;
@@ -38,10 +37,7 @@ public class Game_Manager : MonoBehaviour {
         
         if (need_to_collect == vacuum_total && !won)
         {
-            if (!duck_level)
-                StartCoroutine(Win_Level());
-            else
-                SceneManager.LoadScene(1);
+            StartCoroutine(Win_Level());
             won = true;
         }
     }

@@ -14,9 +14,10 @@ public class Music_Controller : MonoBehaviour {
 
     public AudioSource music;
 	// Use this for initialization
-	void Awake () {
+	void OnEnable () {
         if (!music.isPlaying)
             music.Play();
+<<<<<<< HEAD
         if (instance != null && instance != this) {
             Destroy(this.gameObject);
             return;
@@ -26,5 +27,26 @@ public class Music_Controller : MonoBehaviour {
         DontDestroyOnLoad(this.gameObject);
 
     }
+=======
+        else
+        {
+            print("start");
+            music.time = PlayerPrefs.GetFloat("music_time");
+            print(music.time);
+        }
+	}
+>>>>>>> origin/master
 
+    void Update()
+    {
+        PlayerPrefs.SetFloat("music_time", music.time);
+        print(music.time);
+    }
+	
+    void OnDisable()
+    {
+        print("end");
+        PlayerPrefs.SetFloat("music_time", music.time);
+        print(music.time);
+    }
 }
