@@ -62,6 +62,6 @@ public class Game_Manager : MonoBehaviour {
         if (!duck_lvl)
             level_select_script.LoadOnClick(SceneManager.GetActiveScene().buildIndex + 1);
         else
-            level_select_script.LoadOnClick(2);
+            level_select_script.LoadOnClick(1);
     }
 }
