@@ -20,7 +20,7 @@ public class Pause_Script : MonoBehaviour {
             rb2.velocity = Vector2.zero;
         }
         for (int i = 0; i < rocks.Length; ++i)
-            rocks[i].enabled = false;
+            rocks[i].enabled = true;
     }
 
     void OnDisable()
