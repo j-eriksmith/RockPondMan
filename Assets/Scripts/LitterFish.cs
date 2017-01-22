@@ -12,8 +12,11 @@ public class LitterFish : MonoBehaviour {
     private Color currentTransparency;
     private bool aboveWater = true;
 
+    private AudioSource biteSound;
+
     void Start() {
         StartCoroutine(FishBobbing(underwaterTransparency, cycleTime));
+        biteSound = gameObject.GetComponent<AudioSource>();
     }
 
     void Update() {
@@ -61,6 +64,7 @@ public class LitterFish : MonoBehaviour {
         }
 
         if(c.gameObject.tag == "Trash") {
+            biteSound.Play();
             c.gameObject.SetActive(false);
         }
     }
