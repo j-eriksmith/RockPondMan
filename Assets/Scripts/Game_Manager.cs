@@ -11,9 +11,14 @@ public class Game_Manager : MonoBehaviour {
     public start_to_level_selection level_select_script;
     public Text Win_Text;
     public Canvas canvas;
-    public Camera cam;
     private bool won = false;
+    private Camera cam;
 	public GameObject e_pause, event_sys;
+
+    void Start()
+    {
+        cam = Camera.main;
+    }
 	
 	// Update is called once per frame
 	void Update () {

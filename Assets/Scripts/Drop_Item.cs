@@ -113,7 +113,6 @@ IEnumerator drop_rock(float mouseX, float mouseY, GameObject rock)
     {
         Restart_Text.gameObject.SetActive(true);
         string text_to_hold = Restart_Text.text;
-        print(text_to_hold);
         while (true)
         {
             Restart_Text.text = "";
