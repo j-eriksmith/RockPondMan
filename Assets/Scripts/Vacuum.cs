@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Vacuum : MonoBehaviour {
-    public GameObject[] pulled_objects;
+    private GameObject[] pulled_objects;
     private int cur_index = 0;
     public float speed;
 
@@ -30,11 +30,5 @@ public class Vacuum : MonoBehaviour {
             pulled_objects[cur_index] = c.gameObject;
             cur_index++;
         }
-    }
-
-    // Returns the number objects pulled in by vacuum.
-    public int ObjectsPulled()
-    {
-        return (pulled_objects.Length);
     }
 }
