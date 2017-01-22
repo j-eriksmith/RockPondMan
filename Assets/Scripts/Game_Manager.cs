@@ -11,6 +11,7 @@ public class Game_Manager : MonoBehaviour {
     public start_to_level_selection level_select_script;
     public Text Win_Text;
     public Canvas canvas;
+    public bool duck_level;
     private bool won = false;
     private Camera cam;
     public GameObject e_pause;
@@ -36,13 +37,14 @@ public class Game_Manager : MonoBehaviour {
         
         if (need_to_collect == vacuum_total && !won)
         {
-            StartCoroutine(Win_Level());
+
+            StartCoroutine(Win_Level(duck_level));
             won = true;
         }
     }
 
 
-    IEnumerator Win_Level()
+    IEnumerator Win_Level(bool duck_lvl)
     {
         yield return new WaitForSeconds(0.5f);
         Text win_text = Instantiate(Win_Text, canvas.transform);
@@ -57,6 +59,9 @@ public class Game_Manager : MonoBehaviour {
             win_text.transform.localPosition += new Vector3(-1f, 0, 0);
             yield return new WaitForSeconds(0.00001f);
         }
-        level_select_script.LoadOnClick(SceneManager.GetActiveScene().buildIndex + 1);
+        if (!duck_lvl)
+            level_select_script.LoadOnClick(SceneManager.GetActiveScene().buildIndex + 1);
+        else
+            level_select_script.LoadOnClick(2);
     }
 }
