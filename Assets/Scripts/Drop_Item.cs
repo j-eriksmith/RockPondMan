@@ -59,6 +59,13 @@ public class Drop_Item : MonoBehaviour {
                 cur_item.transform.position = new Vector3(mouse_pos.x, mouse_pos.y, 0);
                 get_next_rock = false;
             }
+
+            if (Input.GetKeyDown(KeyCode.Keypad1))
+            {
+                choosen_item = 0;
+                cur_item = null;
+                get_next_rock = true;
+            }
         }
 
         int sum = 0;
