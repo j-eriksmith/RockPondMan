@@ -18,18 +18,19 @@ public class LitterFish : MonoBehaviour {
     IEnumerator FishBobbing(float aValue, float aTime) {
         for(;;)
         {
-            aboveWater = !aboveWater;
-
-            StartCoroutine(ChaseAlpha(aboveWater ? 1.0f : aValue, aTime / 3.0f));
-
             yield return new WaitForSeconds(aTime);
+            StartCoroutine(ChaseAlpha(!aboveWater, aTime / 3.0f));
         }
     }
 
-    IEnumerator ChaseAlpha(float desiredAlpha, float overTime) {
-
+    IEnumerator ChaseAlpha(bool desiredState, float overTime) {
+        float desiredAlpha = desiredState ? 1.0f : underwaterTransparency;
         float startAlpha = gameObject.GetComponent<SpriteRenderer>().color.a;
         float accumulator = 0.0f;
+
+        if(!desiredState) {
+            aboveWater = false;
+        }
 
         while(accumulator < overTime) {
             
@@ -40,9 +41,10 @@ public class LitterFish : MonoBehaviour {
             yield return 0;
             accumulator += Time.deltaTime;
         }
+        aboveWater = desiredState;
     }
 
-    void OnTriggerEnter2D(Collider2D c) {
+    void OnTriggerStay2D(Collider2D c) {
         if(!aboveWater) {
             return;
         }
