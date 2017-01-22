@@ -36,7 +36,6 @@ public class Drop_Item : MonoBehaviour {
         if (choosen_item != -1) {
 
             if (Input.GetMouseButtonDown(0)) {
-                print(CheckDropLocation.canDrop);
                 if (num_of_items[choosen_item] > 0 && CheckDropLocation.canDrop) {
                     get_next_rock = false;
                     StartCoroutine(drop_rock(mouse_pos.x, mouse_pos.y, cur_item.gameObject));
@@ -48,12 +47,14 @@ public class Drop_Item : MonoBehaviour {
                 {
                     Destroy(cur_item);
                     cur_item = null; get_next_rock = true; choosen_item = -1;
+                    return;
                 }
             }
         
             //JUST FOR TESTING CHANGE THIS TO ALLOW BUTTONS TO CHANGE ROCK
             if (cur_item == null && num_of_items[choosen_item] != 0 && get_next_rock) {
                 cur_item = Instantiate(list_of_items[choosen_item]);
+                cur_item.transform.position = new Vector3(mouse_pos.x, mouse_pos.y, 0);
                 get_next_rock = false;
             }
         }

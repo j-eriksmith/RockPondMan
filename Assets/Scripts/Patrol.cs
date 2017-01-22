@@ -10,6 +10,7 @@ public class Patrol : MonoBehaviour {
 
     public float movespeed;
     public string tagSeek;
+    public bool shouldFlip = false;
 
 	// Use this for initialization
 	void Start () {
@@ -31,6 +32,10 @@ public class Patrol : MonoBehaviour {
     }
     void findNextWaypoint() //Calculates which waypoint to head to next when it reaches a destination.
     {
+        if (shouldFlip)
+        {
+            flipSprite();
+        }
         if (currentWaypoint == waypoints.Length - 1)
         {
             currentWaypoint = waypoints.Length - 2;
@@ -49,6 +54,11 @@ public class Patrol : MonoBehaviour {
                 currentWaypoint--;
         }
     }
+    void flipSprite()
+    {
+        this.transform.localScale = new Vector2(-1 * this.transform.localScale.x, this.transform.localScale.y);
+    }
+
     void flattenWaypoints() //Puts each waypoint on the same z-axis as the moving object regardless of their initial placement.
     {
         foreach (GameObject point in waypoints)

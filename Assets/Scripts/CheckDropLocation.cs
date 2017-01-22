@@ -17,12 +17,10 @@ public class CheckDropLocation : MonoBehaviour {
 	}
 
     void OnMouseEnter() {
-        print("test1");
         canDrop = true;
     }
 
     void OnMouseExit() {
-        print("test2");
         canDrop = false;
     }
 
