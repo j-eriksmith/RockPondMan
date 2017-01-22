@@ -40,7 +40,7 @@ public class Ripple_Physics : MonoBehaviour {
             {
                 list_of_ripples[i].transform.localScale += new Vector3(increase_speed / 10, increase_speed / 10, 0);
                 //there is no index 0 since the first object is the empty object that is the collider but no sprite
-                ripples_sprites[i].color = new Color(ripples_sprites[i].color.r, ripples_sprites[i].color.g, ripples_sprites[i].color.b, ripples_sprites[i].color.a - 0.01f);
+                ripples_sprites[i].color = new Color(ripples_sprites[i].color.r, ripples_sprites[i].color.g, ripples_sprites[i].color.b, ripples_sprites[i].color.a - 0.015f);
                 if (i == num_ripples - 1 && ripples_sprites[i].color.a <= 0)
                     Destroy(gameObject);
             }
@@ -86,5 +86,7 @@ public class Ripple_Physics : MonoBehaviour {
             ripples_sprites[num_ripples] = list_of_ripples[num_ripples].GetComponent<SpriteRenderer>();
             num_ripples++;
         }
+        //yield return new WaitForSeconds(1);
+        // Play the animation to do the water going up effect when the rock hits
     }
 }
