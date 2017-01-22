@@ -50,17 +50,20 @@ public class Game_Manager : MonoBehaviour {
         Text win_text = Instantiate(Win_Text, canvas.transform);
         win_text.transform.position = Vector3.zero;
         yield return new WaitForSeconds(2);
-        while(cam.transform.position.x < 22)
-        {
-            if (cam.transform.position.x + 0.18f > 22)
-                cam.transform.position +=  new Vector3(22 - cam.transform.position.x, 0, 0);
-            else
-                cam.transform.position += new Vector3(0.18f, 0, 0);
-            win_text.transform.localPosition += new Vector3(-1f, 0, 0);
-            yield return new WaitForSeconds(0.00001f);
-        }
+
         if (!duck_lvl)
+        {
+            while (cam.transform.position.x < 22)
+            {
+                if (cam.transform.position.x + 0.18f > 22)
+                    cam.transform.position += new Vector3(22 - cam.transform.position.x, 0, 0);
+                else
+                    cam.transform.position += new Vector3(0.18f, 0, 0);
+                win_text.transform.localPosition += new Vector3(-1f, 0, 0);
+                yield return new WaitForSeconds(0.00001f);
+            }
             level_select_script.LoadOnClick(SceneManager.GetActiveScene().buildIndex + 1);
+        }
         else
             level_select_script.LoadOnClick(1);
     }
