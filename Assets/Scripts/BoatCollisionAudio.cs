@@ -15,7 +15,7 @@ public class BoatCollisionAudio : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D c) {
         if(c.gameObject.tag == "Trash") {
-            print("Has Collided");
+            boatSound.pitch = Random.Range(0.8f, 1.2f);
             boatSound.Play();
         }
     }
