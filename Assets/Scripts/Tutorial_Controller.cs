@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Tutorial_Controller : MonoBehaviour {
 
     public Text[] text_to_show;
+    public Text text_to_remove;
     public GameObject eventsystem;
     private SpriteRenderer sr;
 	void Start () {
@@ -16,6 +17,7 @@ public class Tutorial_Controller : MonoBehaviour {
     IEnumerator start_tutorial()
     {
         yield return new WaitForSeconds(0.5f);
+        text_to_remove.gameObject.SetActive(true);
         for(int i = 0; i < text_to_show.Length; ++i)
         {
             text_to_show[i].gameObject.SetActive(true);
@@ -48,6 +50,7 @@ public class Tutorial_Controller : MonoBehaviour {
             yield return new WaitForSeconds(0.0001f);
         }
         eventsystem.SetActive(true);
+        text_to_remove.gameObject.SetActive(false);
         Destroy(gameObject);
     }
 
